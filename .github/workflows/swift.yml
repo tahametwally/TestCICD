@@ -26,4 +26,9 @@ jobs:
 
       - name: Build and Test
         run: |
-          xcodebuild clean build test -workspace CICD.xcworkspace -scheme CICD -destination "platform=iOS Simulator,OS=17.0,name=iPhone 12"
+          xcodebuild clean build test -workspace CICD.xcworkspace -scheme CICD -destination "platform=iOS Simulator,OS=15.0,name=iPhone 17"
+
+      # Add a step to use your personal access token
+      - name: Use Personal Access Token
+        run: |
+          echo "machine github.com login your-username password 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" > ~/.netrc
