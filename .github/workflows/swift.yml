@@ -1,22 +1,29 @@
-# This workflow will build a Swift project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
-
-name: Swift
+name: CI/CD for iOS
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
-
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Xcode
+        uses: actions/setup-xcode@v2
+        with:
+          xcode-version: '15.x'  # Specify the version you need
+
+      - name: Install Dependencies
+        run: |
+          sudo gem install bundler
+          bundle install
+          bundle exec pod install
+
+      - name: Build and Test
+        run: |
+          xcodebuild clean build test -workspace CICD.xcworkspace -scheme CICD -destination "platform=iOS Simulator,OS=15.0,name=iPhone 17"
