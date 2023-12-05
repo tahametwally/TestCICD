@@ -26,4 +26,4 @@ jobs:
 
       - name: Build and Test
         run: |
-          xcodebuild clean build test -workspace CICD.xcworkspace -scheme CICD -destination "platform=iOS Simulator,OS=15.0,name=iPhone 17"
+          xcodebuild clean build test -workspace CICD.xcworkspace -scheme CICD -destination "platform=iOS Simulator,OS=17.0,name=iPhone 12"
